@@ -13,7 +13,7 @@ const ProductPage = () => {
     const [data, setData] = useState([]);
     const [searchInput, setSearchInput] = useState('');
 
-   
+
     useEffect(() => {
         const fetchData = async () => {
             const products = await getApi();
@@ -25,7 +25,7 @@ const ProductPage = () => {
     const filteredData = data.filter((item) =>
         item.title.toLowerCase().startsWith(searchInput.toLowerCase())
     );
-    
+
 
     return (
         <div className='flex flex-col justify-center w-full gap-3 '>
@@ -39,10 +39,15 @@ const ProductPage = () => {
                 className="block w-[50%] m-auto p-2  border border-gray-300 rounded mb-6"
             />
 
+
             <div className="flex flex-wrap w-[90%] m-auto gap-4">
-                {filteredData.map((item) => (
-                    <Box key={item.id} props={item} />
-                ))}
+                {filteredData.length > 0 ? (
+                    filteredData.map((item) => (
+                        <Box key={item.id} props={item} />
+                    ))
+                ) : (
+                    <p className="text-center w-full font-bold">No card here</p>
+                )}
             </div>
 
         </div>
